@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Website</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(
+                135deg,
+                /* #0f1729,
+                #1e2a4a,
+                #2d3a6d,
+                #364686 */
+                /* #2b0000,  Deep dark red */
+                /* #1a0000,  Darker red */
+                #0d0d0d,  /* Near black */
+                #1a0000,  /* Darker red */
+                #0d0d0d,  /* Near black */
+                #1a001a   /* Dark purple */
+            );
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: white;
+            min-height: 100vh;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            /* background-color: rgba(15, 23, 41, 0.85); */
+            background-color:#0d0d0d,  /* Near black */
+            ;
+            padding: 1rem 4rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background-color: rgba(15, 23, 41, 0.95);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            color: white;
+        }
+
+        .logo-box {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            color: #ffffff;
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+            transition: width 0.4s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            gap: 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .hero-image {
+            width: 300px;
+            height: 400px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+            transition: all 0.5s ease;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .greeting {
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeUp 0.5s ease forwards;
+        }
+
+        .name {
+        
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            background: linear-gradient(135deg, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            opacity: 0;
+            animation: fadeUp 0.5s ease forwards 0.2s;
+        }
+
+        .title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            gap: 0.5rem;
+            font-weight: 500;
+            opacity: 0;
+            animation: fadeUp 0.5s ease forwards 0.4s;
+        }
+
+        .role-text {
+            position: relative;
+            height: 2.5rem;
+            overflow: hidden;
+        }
+
+        .role-text-wrap {
+            animation: slideUp 12s cubic-bezier(0.23, 1, 0.32, 1) infinite;
+            position: relative;
+        }
+
+        .role-text span {
+            display: block;
+            height: 2.5rem;
+            font-weight: 600;
+            opacity: 1;
+            transform: translateY(0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        @keyframes slideUp {
+            0%, 20% {
+                transform: translateY(0);
+            }
+            25%, 45% {
+                transform: translateY(-2.5rem);
+            }
+            50%, 70% {
+                transform: translateY(-5rem);
+            }
+            75%, 95% {
+                transform: translateY(-7.5rem);
+            }
+            100% {
+                transform: translateY(-10rem);
+            }
+        }
+
+        .role-text span:nth-child(1) {
+            background-image: linear-gradient(135deg, #3b82f6, #1d4ed8);
+        }
+
+        .role-text span:nth-child(2) {
+            background-image: linear-gradient(135deg, #ec4899, #be185d);
+        }
+
+        .role-text span:nth-child(3) {
+            background-image: linear-gradient(135deg, #10b981, #047857);
+        }
+
+        @keyframes fadeUp {
+            from {
+            opacity: 0;
+            transform: translateY(20px);
+            }
+            to {
+            opacity: 1;
+            transform: translateY(0);
+            }
+        }
+
+        .description {
+            color: #94a3b8;
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeUp 0.5s ease forwards 0.6s;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            opacity: 0;
+            animation: fadeUp 0.5s ease forwards 0.8s;
+        }
+
+        .social-icon {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            color: #3b82f6;
+        }
+
+        .resume-btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .resume-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .resume-btn:hover::before {
+            left: 100%;
+        }
+
+        .resume-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+        }
+
+        @media (max-width: 1024px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem;
+                gap: 2rem;
+            }
+
+            .hero-image {
+                width: 300px;
+                height: 300px;
+            }
+
+            .hero-content {
+                height: auto;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .navbar {
+                padding: 1rem 2rem;
+            }
+
+            .title {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .name {
+                font-size: 2.5rem;
+            }
+
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .hero-image {
+                width: 250px;
+                height: 250px;
+            }
+        }
+
+        .projects {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .projects h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-align: center;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 1.5rem;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-github {
+            color: #fff;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-github:hover {
+            color: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        .project-tech {
+            color: #3b82f6;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .project-description ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .project-description li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .project-description li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+        }
+
+        @media (max-width: 1024px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem;
+                gap: 2rem;
+            }
+
+            .hero-image {
+                width: 300px;
+                height: 300px;
+            }
+
+            .hero-content {
+                height: auto;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .navbar {
+                padding: 1rem 2rem;
+            }
+
+            .title {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .name {
+                font-size: 3rem;
+            }
+
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .hero-image {
+                width: 250px;
+                height: 250px;
+            }
+
+            .projects {
+                padding: 4rem 1rem;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact {
+            padding: 6rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 16px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #94a3b8;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+        }
+
+        @media (max-width: 1024px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem;
+                gap: 2rem;
+            }
+
+            .hero-image {
+                width: 300px;
+                height: 300px;
+            }
+
+            .hero-content {
+                height: auto;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .navbar {
+                padding: 1rem 2rem;
+            }
+
+            .title {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .name {
+                font-size: 3rem;
+            }
+
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .hero-image {
+                width: 250px;
+                height: 250px;
+            }
+
+            .projects {
+                padding: 4rem 1rem;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <div class="logo-box">AR</div>
+            <span>Akshay | Portfolio</span>
+        </a>
+        <div class="nav-links">
+            <!-- <a href="#about">About</a> -->
+            <!-- <a href="#experience">Experience</a> -->
+            <a href="#projects">Projects</a>
+            <!-- <a href="#blog">Blog</a> -->
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <img src="asset/img.webp" alt="Profile" class="hero-image">
+        <div class="hero-content">
+            <p class="greeting">Hey there, I am</p>
+            <h2 class="name">Akshay</h2>
+            <h2 class="title">
+                I am a 
+                <div class="role-text">
+                    <div class="role-text-wrap">
+                        <span>Data Scientist</span>
+                        <span>Machine Learning Engineer</span>
+                        <span>Deep Learning Engineer</span>
+                        <!-- <span>Data Scientist</span> -->
+                    </div>
+                </div>
+            </h2>
+            <p class="description">I turn complex data into actionable insights. With expertise in machine learning and deep learning, I create intelligent models to solve real-world problems.</p>
+            <div class="social-links">
+                <a href="https://github.com/Akshayredekar07" target="_blank" class="social-icon">
+                    <i class="fab fa-github"></i>
+                </a>
+                <!-- <a href="https://codepen.io/yourusername" target="_blank" class="social-icon">
+                    <i class="fab fa-codepen"></i>
+                </a> -->
+                <a href="https://linkedin.com/in/akshayredekar07" target="_blank" class="social-icon">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://drive.google.com/file/d/1JEQs3XgH_RUUYmlAQHCMMPdx5I4XoLIj/view?usp" class="resume-btn" target="_blank">Resume</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects" id="projects">
+        <h2>Featured Projects</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 class="project-title">Multi-Modal Deepfake Detection</h3>
+                    <a href="https://github.com/Akshayredekar07/Multimodal-Deepfake-Detection.git" target="_blank" class="project-github">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                <div class="project-tech">Python, PyTorch, EfficientNet, LSTM, Attention Mechanism, OpenCV</div>
+                <div class="project-description">
+                    <ul>
+                        <li>Developed a deep learning model for detecting deepfake videos by integrating visual and audio modalities for enhanced multimedia security.</li>
+                        <li>Leveraged EfficientNet for spatial feature extraction and combined it with LSTM and attention mechanisms to capture spatiotemporal dependencies.</li>
+                        <li>Implemented frame extraction and audio separation pipelines, optimizing the model using PyTorch.</li>
+                        <li>Performed end-to-end preprocessing of video datasets for consistent model input.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 class="project-title">LungX: X-Ray Classification</h3>
+                    <a href="https://github.com/Akshayredekar07/Lungs-Xrays-Classification.git" target="_blank" class="project-github">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                <div class="project-tech">Python, PyTorch, CNN</div>
+                <div class="project-description">
+                    <ul>
+                        <li>Built an image classification model using CNN to classify chest X-ray images into normal and abnormal categories.</li>
+                        <li>Implemented advanced data augmentation techniques and fine-tuned hyperparameters to improve model generalization.</li>
+                        <li>Evaluated performance using precision, recall, F1-score, and confusion matrix.</li>
+                        <li>Conducted extensive preprocessing of X-ray datasets, including contrast enhancement and normalization.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 class="project-title">Audio Sentiment Analysis</h3>
+                    <a href="https://github.com/Akshayredekar07/Audio_Sentiment_Analysis.git" target="_blank" class="project-github">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+                <div class="project-tech">Python, PyTorch, Librosa, CNN, MFCC</div>
+                <div class="project-description">
+                    <ul>
+                        <li>Designed a deep learning pipeline using CNN models for classifying sentiments from audio recordings.</li>
+                        <li>Extracted and preprocessed acoustic features using Librosa and implemented a PyTorch-based CNN architecture.</li>
+                        <li>Achieved high sentiment classification accuracy by tuning convolutional layers and dropout rates.</li>
+                        <li>Applied noise filtering and silence removal techniques during preprocessing.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <h2>Get In Touch</h2>
+        <div class="contact-form">
+            <form id="contactForm">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message</label>
+                    <textarea id="message" name="message" required placeholder="Enter your message"></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <script>
+        // Add scroll behavior for navbar
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Add hover effect for hero image
+        const heroImage = document.querySelector('.hero-image');
+        heroImage.addEventListener('mousemove', (e) => {
+            const { left, top, width, height } = heroImage.getBoundingClientRect();
+            const x = (e.clientX - left) / width - 0.5;
+            const y = (e.clientY - top) / height - 0.5;
+            
+            heroImage.style.transform = `
+                scale(1.05)
+                rotateY(${x * 10}deg)
+                rotateX(${-y * 10}deg)
+            `;
+        });
+
+        heroImage.addEventListener('mouseleave', () => {
+            heroImage.style.transform = 'scale(1) rotateY(0) rotateX(0)';
+        });
+    </script>
+</body>
+</html>
+
+
